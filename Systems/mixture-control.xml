@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+
+<!--
+
+Emulates the auto mixture controls of a Packard Merlin powered Mustang P-51B/C/D/K/H.  
+Would probably work for other Merlin powered aircraft like the Spitfire and 
+Mosquito as well.
+
+Lever in Full Rich position will give full rich mixture 100% of the time.
+This is used for stating the engine, take off and landing at lower altitudes  
+and in case the auto mixture feature malfunctions.
+
+With the lever at it's lowest position it will give a leaned mixture for 
+cruising.  This will automatically control mixture but should only be used 
+for reduced throttle cruising.  It will reduce fuel use by about 5% compared 
+to the normal run position.  When the throttle is fully closed this 
+position will also act as the fuel cutoff position for shutting down the 
+engine on the ground.
+
+In between will result in the normal run position which will automatically 
+control mixture at all altitudes and power settings.
+
+-->
+<system name="Mixture">
+    
+     
+    <channel name="Mixture Control">
+
+        <switch name="systems/engine/primed">
+           <default value="0"/>
+           <test logic="AND" value="1.0">
+               /controls/engines/engine/primer-time GE 4.0
+               /controls/engines/engine/primer-time LE 18.0           <!-- flooded -->
+               /fdm/jsbsim/systems/engine/coolant-temp-degC LE 40     <!-- cold engine -->
+           </test>
+           <test logic="AND" value="1.0">
+               /controls/engines/engine/primer-time GE 1.0
+               /controls/engines/engine/primer-time LE 6.0            <!-- flooded -->
+               /fdm/jsbsim/systems/engine/coolant-temp-degC GT 40     <!-- hot engine -->
+           </test>
+        </switch>
+              
+        <switch name="mixture/position">
+            <default value= "10000" />  <!-- cut off -->
+            <test logic="AND" value="atmosphere/delta">  <!-- emergency full rich -->
+                fcs/mixture-cmd-norm  GE 0.90
+                /engines/engine/running GT 0.90
+                systems/engine/primed LE 0.10
+            </test>
+            <test logic="AND" value="1.0"> <!-- startup -->
+                fcs/throttle-cmd-norm  GE 0.14
+                fcs/throttle-cmd-norm  LE 0.18
+                fcs/mixture-cmd-norm   LE 0.1
+                systems/engine/primed  GE 0.90
+            </test>
+            <test logic="AND" value="1.0">    <!-- normal run -->
+                fcs/mixture-cmd-norm  LT 0.90
+                fcs/mixture-cmd-norm  GT 0.1
+               <!-- /engines/engine/running GT 0.90
+                systems/engine/primed LE 0.10 -->
+            </test> 
+        </switch>
+
+      <fcs_function name="mixture">
+          <function>
+            <product>
+                <quotient>  <!-- invert mixture/position -->
+                    <value> 1.0 </value>
+                    <property> mixture/position </property>
+                </quotient>
+                <property> atmosphere/delta </property>
+            </product>
+          </function>
+          <output>fcs/mixture-pos-norm</output>   
+        </fcs_function>
+        
+  </channel>
+
+</system>

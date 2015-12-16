@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!-- Gunsight gyro on check -->
+<PropertyList>
+	<condition>
+		<equals>
+			<property>/controls/armament/gunsight/computer-on</property>
+			<value>1</value>
+		</equals>
+	</condition>
+	<marker>
+		<x-m>2.735</x-m>
+		<y-m>-0.215</y-m>
+		<z-m>0.375</z-m>
+		<scale>1</scale>
+	</marker>
+</PropertyList>

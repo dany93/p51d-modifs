@@ -1,0 +1,480 @@
+<?xml version="1.0"?>
+
+
+
+<system name="Propulsion">
+    
+    <property>systems/engine/mp-inhg</property>
+    
+    <property> /controls/armament/drop-tank-released-1 </property>
+    <property> /controls/armament/drop-tank-released-2 </property>
+    <property value="1">systems/engine/ram-air-control</property>
+    <property value="0">systems/engine/hot-air-control</property>
+        
+   <channel name="Boost">
+   
+        <scheduled_gain name="systems/engine/target-mp-inhg">
+            <input>propulsion/engine/set-running</input>
+            <table>
+                <independentVar>/controls/engines/engine/throttle</independentVar>
+                <tableData>
+                      0.0    10.95
+                      0.97   66.99
+                      0.99   67.00
+                      1.0    75.05
+                </tableData>         
+            </table>
+            <clipto>
+               <min> 5 </min>
+               <max> 75.05 </max>
+             </clipto>
+        </scheduled_gain>   
+   
+    <fcs_function name="systems/engine/boost-calc">
+        <function>
+            <integer>
+                <table>
+                    <independentVar lookup="row">atmosphere/density-altitude</independentVar>
+                    <independentVar lookup="column">systems/engine/target-mp-inhg</independentVar>
+                    <independentVar lookup="table">propulsion/engine/boost-speed</independentVar>
+                    <tableData breakPoint="0">
+                                    36     46     61     67    75     81
+                        0           0     0.1    0.2    0.4    0.6   0.8
+                        5000        0.1   0.2    0.4    0.6    0.8    1
+                        6500        0.2   0.4    0.6    0.8    1      1.2
+                        10500       0.4   0.6    0.8    1      1.2    1.4
+                        13400       0.6   0.8    1      1.2    1.4    1.6
+                        14200       0.8   1      1.2    1.4    1.6    1.8
+                        16250       1     1.2    1.4    1.5    1.8    1.99
+                    </tableData>
+                    <tableData breakPoint="1">
+                                    36     46     61     67    75     81
+                        0           0     0.1    0.2    0.4    0.6   0.8
+                        5000        0.1   0.2    0.4    0.6    0.95  1.1
+                        6500        0.2   0.4    0.6    0.95    1.1  1.25
+                        10500       0.4   0.6    0.95   1.1    1.25  1.5
+                        13400       0.6   0.95   1.1    1.25   1.5   1.75
+                        14200       0.95  1.1    1.25   1.5    1.75  1.9
+                        16250       1.1   1.25   1.5    1.75   1.9   1.99
+                    </tableData>
+                </table>
+            </integer>            
+        </function>
+        <clipto>
+           <min> 0.099 </min>
+           <max> 1.99 </max>
+        </clipto>
+        <output>systems/engine/boost-calculation</output>
+    </fcs_function>
+
+       <switch name="systems/engine/boost-speed">
+           <default value="0"/>
+           <test value="1">
+              /controls/engines/engine/supercharger-switch GT 0.9
+           </test>
+           <test value="0">
+               /controls/engines/engine/supercharger-switch LT -0.9
+           </test>
+           <test logic="AND" value="systems/engine/boost-calculation">
+               /controls/engines/engine/supercharger-switch LT 0.1
+               /controls/engines/engine/supercharger-switch GT -0.1
+           </test>
+       </switch>
+
+      <pure_gain name="systems/engine/boost-speed-gain">
+          <input> systems/engine/boost-speed </input>
+          <gain> 1.0 </gain>
+          <output> propulsion/engine/boost-speed </output>          
+       </pure_gain>
+        
+      <fcs_function name="systems/engine/MP-alt-bsfc-lbs_hphr-curve">
+          <function>
+                <table>
+                    <independentVar lookup="row">atmosphere/density-altitude</independentVar>
+                    <independentVar lookup="column">/engines/engine/mp-inhg</independentVar>
+                    <independentVar lookup="table">propulsion/engine/boost-speed</independentVar>
+                    <tableData breakPoint="0">
+                                30       36      46      61      67      75
+                        0       0.3700   0.3900  0.4100  0.5700  0.5900  0.6000
+                        5000    0.3800   0.4000  0.4200  0.5900  0.6100  0.6300
+                        10000   0.3900   0.4100  0.4400  0.6100  0.6300  0.6500
+                        15000   0.4000   0.4300  0.4600  0.6300  0.6500  0.6700
+                        20000   0.4200   0.4500  0.4800  0.6500  0.6700  0.6900
+                        25000   0.4500   0.4800  0.5100  0.6700  0.6900  0.7100
+                        30000   0.4800   0.5200  0.5600  0.7000  0.7200  0.7400
+                        35000   0.5300   0.5700  0.6100  0.7300  0.7500  0.7700
+                        40000   0.6200   0.6400  0.6600  0.7500  0.7700  0.7900
+                        42000   0.7000   0.7100  0.7100  0.7700  0.7900  0.81
+                   </tableData> 
+                   <tableData breakPoint="1">   
+                                30      36      46      61      67      75
+                        0       0.3600  0.3900  0.4230  0.6000  0.6200  0.6300
+                        5000    0.4200  0.4300  0.4426  0.6500  0.6700  0.6800
+                        10000   0.4500  0.4600  0.4700  0.6900  0.7100  0.7200
+                        15000   0.4700  0.4800  0.4900  0.7200  0.7500  0.7700
+                        20000   0.4800  0.5000  0.5300  0.7700  0.8000  0.8200
+                        25000   0.4900  0.5400  0.5900  0.8100  0.8400  0.8700
+                        30000   0.5200  0.5700  0.6200  0.8600  0.9000  0.9300
+                        35000   0.5700  0.6100  0.6500  0.9100  0.9500  0.98
+                        40000   0.6525  0.6700  0.8000  1.0200  1.0500  1.08
+                        42000   0.6350  0.7000  0.9500  1.1100  1.1500  1.18
+                   </tableData>
+                </table>  
+          </function>
+          <clipto>
+             <min> 0.3700 </min>
+             <max> 1.18 </max>
+           </clipto>
+          <output>propulsion/engine/bsfc-lbs_hphr</output>   
+        </fcs_function>
+        
+       <fcs_function name="systems/engine/VE-MP-curve">
+          <function>
+                <table>
+                    <independentVar lookup="row">/engines/engine/mp-inhg</independentVar>
+                    <tableData>
+                            30   0.75    
+                            36   0.69 
+                            40   0.625 
+                            46   0.65
+                            61   0.8259
+                            67   0.8  
+                    </tableData>
+                </table>  
+          </function>
+          <clipto>
+             <min> 0.75 </min>
+             <max> 0.8259 </max>
+           </clipto>
+          <output>propulsion/engine/volumetric-efficiency</output>   
+        </fcs_function>
+        
+       
+       <pure_gain name="systems/engine/throttle">
+          <input> ap/throttle-cmd-norm </input>
+          <gain> 1.0 </gain>
+          <output> fcs/throttle-pos-norm </output>
+       </pure_gain>
+        
+    </channel>
+    
+    <!-- 
+    Create plusible oil pressure, oil temp and coolant temps for this engine.  These are 
+    currently modelled in JSBSim for air cooled engines only (O-360) and these functions 
+    use those numbers to guestimate the kinds of numbers a liquid cooled engine would have.
+    
+    At best this is a kludge and will have to be redone as JSBSim's engine modelling improves.
+    -->
+    
+    <channel name="Engine Gauges">
+
+      <fcs_function name="systems/engine/oil-temp-degC">
+        <function>
+            <table>
+            <independentVar lookup="row">/engines/engine/oil-temperature-degf</independentVar>
+                <tableData>
+                    32     0.0
+                    212    100
+                </tableData>
+            </table>
+        </function>
+      </fcs_function>
+    
+      <fcs_function name="systems/engine/oil-pressure-psi">
+        <function>
+            <table>    
+            <independentVar lookup="row">systems/engine/oil-temp-degC</independentVar>
+            <independentVar lookup="column">/engines/engine/rpm</independentVar>
+                <tableData>
+                            0     500   1000    2000    3000
+                    -50     0.0   80      100   150     200
+                     0      0.0   60      70    100     150
+                    50      0.0   30      55    75      80
+                    70      0.0   25      50    70      75
+                    100     0.0   20      40    60      65      
+                </tableData>
+            </table>  
+        </function>
+       </fcs_function>
+   
+     <fcs_function name="systems/engine/coolant-temp-degC">
+        <function>
+        <table>
+            <independentVar lookup="row">/engines/engine/cht-degf</independentVar>
+                <tableData>
+                    -70    -56.7
+                    32      0.0
+                    400    120
+                    800    248
+                </tableData>
+            </table>
+        </function>
+      </fcs_function>
+
+      <fcs_function name="systems/engine/fuel-pump-gain">
+        <function>
+            <sum>
+                <product>
+                   <table>
+                      <independentVar lookup="row">propulsion/engine/propeller-rpm</independentVar>
+                      <tableData>
+                          0    0
+                          400  16
+                      </tableData>
+                  </table>
+                  <property>/controls/fuel/on</property>
+                </product>
+                <product>
+                    <value> 12 </value>
+                    <property>propulsion/fuel_pump</property>
+                    <property>/controls/engines/engine/master-bat</property>
+                    <property>/controls/fuel/on</property>
+                </product>
+            </sum>
+        </function>
+      </fcs_function>
+
+     <kinematic name="systems/engine/fuel-pump-psi">
+        <input>systems/engine/fuel-pump-gain</input>
+        <traverse>
+           <setting>
+             <position>0</position>
+             <time>1.0</time>
+           </setting>
+           <setting>
+             <position>12</position>
+             <time>1.0</time>
+          </setting>
+           <setting>
+             <position>19</position>
+             <time>0.5</time>
+          </setting>
+        </traverse>
+        <clipto>
+             <min> 0 </min>
+             <max>systems/engine/fuel-pump-gain</max>
+        </clipto>
+        <!-- <gain>systems/engine/fuel-pump-gain</gain> -->
+      </kinematic>
+      
+ <!--     <pure_gain name="systems/engine/fuel-pump-psi">
+        <input>systems/engine/fuel-pump-psi_lag</input>
+        <gain>systems/engine/fuel-pump-gain</gain>
+        <clipto>
+             <min> 0 </min>
+             <max> 19 </max>
+        </clipto>
+      </pure_gain> -->
+
+      <switch name="systems/fuel-pressure">
+          <default value="0"/>
+          <test value="1">
+             systems/engine/fuel-pump-psi GT 8
+          </test>
+      </switch>
+
+    </channel>
+
+    <channel name="fuel_tank_selection">
+       <!-- fuel tank selection -->
+
+       <switch name="systems/fuel/tank/selected">
+          <default value="0.0"/>
+          <test value="1">
+             /controls/fuel/tank-selector == 0
+          </test>
+          <output>/consumables/fuel/tank/selected</output>
+      </switch>
+
+      <switch name="systems/fuel/tank[1]/selected">
+          <default value="0"/>
+          <test value="1">
+             /controls/fuel/tank-selector == 1
+          </test>
+          <output>/consumables/fuel/tank[1]/selected</output>
+      </switch>
+
+      <switch name="systems/fuel/tank[2]/selected">
+          <default value="0"/>
+          <test value="1">
+             /controls/fuel/tank-selector == 2
+          </test>
+          <output>/consumables/fuel/tank[2]/selected</output>
+      </switch>
+
+      <switch name="systems/fuel/tank[3]/selected">
+          <default value="0"/>
+          <test value="1">
+             /controls/fuel/tank-selector == 3
+          </test>
+          <output>/consumables/fuel/tank[3]/selected</output>
+      </switch>
+
+      <switch name="systems/fuel/tank[4]/selected">
+          <default value="0"/>
+          <test value="1">
+             /controls/fuel/tank-selector == 4
+          </test>
+          <output>/consumables/fuel/tank[4]/selected</output>
+      </switch>
+
+      <pure_gain name="tank0-selected">
+            <input> systems/fuel/tank/selected </input>
+            <gain> systems/fuel-pressure </gain>
+            <clipto>
+              <min> 0</min>
+              <max> 1</max>
+            </clipto>
+            <output>propulsion/tank/priority</output>
+        </pure_gain>
+
+      <pure_gain name="tank1-selected">
+            <input> systems/fuel/tank[1]/selected </input>
+            <gain> systems/fuel-pressure </gain>
+            <clipto>
+              <min> 0</min>
+              <max> 1</max>
+            </clipto>
+            <output>propulsion/tank[1]/priority</output>
+        </pure_gain>
+         
+      <pure_gain name="tank2-selected">
+            <input> systems/fuel/tank[2]/selected </input>
+            <gain> systems/fuel-pressure </gain>
+            <clipto>
+              <min> 0</min>
+              <max> 1</max>
+            </clipto>
+            <output>propulsion/tank[2]/priority</output>
+        </pure_gain>
+
+        <pure_gain name="tank3-selected">
+            <input> systems/fuel/tank[3]/selected </input>
+            <gain> systems/fuel-pressure </gain>
+            <clipto>
+              <min> 0</min>
+              <max> 1</max>
+            </clipto>
+            <output>propulsion/tank[3]/priority</output>
+        </pure_gain>
+
+        <pure_gain name="tank4-selected">
+            <input> systems/fuel/tank[4]/selected </input>
+            <gain> systems/fuel-pressure </gain>
+            <clipto>
+              <min> 0</min>
+              <max> 1</max>
+            </clipto>
+            <output>propulsion/tank[4]/priority</output>
+        </pure_gain>           
+
+        <pure_gain name="propulsion/current_feed_tank">
+            <input> /controls/fuel/tank-selector </input>
+            <gain> 1.0 </gain>
+            <output>/controls/engines/engine/feed_tank</output>
+        </pure_gain>
+
+    </channel>
+
+    <channel name="Drop Tanks">
+
+       <switch name="propulsion/tank[3]/logical-contents-lbs">
+           <default value="propulsion/tank[3]/contents-lbs"/>
+           <test logic="OR" value="0">
+              /controls/armament/drop-tank-released-1 == 1
+              /controls/armament/User-Selected-Stores LT 4
+              /controls/armament/User-Selected-Stores GT 5
+           </test>
+       </switch>
+
+       <pure_gain name="left-drop-tank">
+            <input> propulsion/tank[3]/logical-contents-lbs </input>
+            <gain> 1.0 </gain>
+            <output>propulsion/tank[3]/contents-lbs</output>
+       </pure_gain>
+
+       <switch name="propulsion/tank[4]/logical-contents-lbs">
+           <default value="propulsion/tank[4]/contents-lbs"/>
+           <test logic="OR" value="0">
+              /controls/armament/drop-tank-released-2 == 1
+              /controls/armament/User-Selected-Stores LT 4
+              /controls/armament/User-Selected-Stores GT 5
+           </test>
+       </switch>
+
+       <pure_gain name="right-drop-tank">
+            <input> propulsion/tank[4]/logical-contents-lbs </input>
+            <gain> 1.0 </gain>
+            <output>propulsion/tank[4]/contents-lbs</output>
+       </pure_gain>
+           
+    </channel>
+    
+    <channel name="climb">
+
+       <pure_gain name="climb_rate_raw">
+            <input> velocities/v-down-fps </input>
+            <gain> -60.0 </gain>
+            <output>/velocities/vertical-speed-fpm-raw</output>
+       </pure_gain>
+
+       <fcs_function name="systems/climb_rate">
+          <function>
+            <sum>
+                <property>/velocities/vertical-speed-fpm-raw</property>
+                <value> 0 </value>
+            </sum>
+        </function>
+        <output>/velocities/vertical-speed-fpm</output>
+      </fcs_function>
+
+    </channel>
+
+    <channel name="Induction Air">
+
+       <pure_gain name="Ram-or-filterd-air">
+            <input> systems/engine/ram-air-control </input>
+            <gain> 0.993 </gain>
+            <output>propulsion/engine/ram-air-factor</output>
+       </pure_gain>
+
+       <!--<pure_gain name="Hot-Air">
+          <input>systems/engine/hot-air</input>
+          <gain>??? </gain>
+          <output>how knows?</output>
+       </pure_gain>-->
+
+    </channel>
+    
+    <channel name="Engine Loudness">
+       
+       <switch name="propulsion/engine/enclosure-attenuation">
+          <default value="1"/>
+          <test value= "propulsion/engine/enclosure-attenuation-level">
+             /sim/current-view/internal GT 0.5
+          </test>
+      </switch>
+
+       <fcs_function name="enclosure attenuation">
+          <function>
+            <product>
+              <property>/canopy/position-norm</property>
+              <value>6.0</value>
+           </product>
+          </function>
+          <clipto>
+            <min>0.1</min>
+            <max> 1.0 </max>
+          </clipto>
+          <output>propulsion/engine/enclosure-attenuation-level</output>
+       </fcs_function>
+
+       <!--<pure_gain name="Hot-Air">
+          <input>systems/engine/hot-air</input>
+          <gain>??? </gain>
+          <output>how knows?</output>
+       </pure_gain>-->
+
+    </channel>
+    
+</system>

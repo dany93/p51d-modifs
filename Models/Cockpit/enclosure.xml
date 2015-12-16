@@ -1,0 +1,149 @@
+<?xml version="1.0"?>
+<PropertyList>
+
+<path>canopy.ac</path>
+
+    <animation>
+        <type>range</type>
+        <min-m>0</min-m>
+        <max-m>10000</max-m>
+    </animation>
+    
+ <params>
+    <canopy>
+        <open>
+            <property>sim/multiplay/generic/float[3]</property>
+        </open>
+    </canopy>
+</params>
+    
+ <animation>
+  <type>translate</type>  
+  <object-name>canopy</object-name>
+  <object-name>canopyLowerSkin</object-name>
+  <object-name>brace</object-name>
+  <object-name>exteriorWindshieldBow</object-name>
+  <object-name>frontDoublerRight</object-name>
+  <object-name>frontDoublerLeft</object-name>
+  <object-name>rearSelf</object-name>
+  <object-name>rearStructure</object-name>
+  <object-name>truckBracketLeft</object-name>
+  <object-name>truckBracketRight</object-name>
+  <object-name>upperCoverLeft</object-name>
+  <object-name>upperCoverRight</object-name>
+  <object-name>windshieldBow</object-name>  
+  <object-name>truckBodyLeft</object-name>
+  <object-name>truckBodyRight</object-name>
+  <object-name>canopyReleaseDogLeft</object-name>
+  <object-name>canopyReleaseDogRight</object-name>
+  <object-name>canopyReleaseBarRight</object-name>
+  <object-name>canopyReleaseBarLeft</object-name>
+  <object-name>truckPlacardRight</object-name>
+  <object-name>truckPlacardLeft</object-name>
+  <property>canopy/position-norm</property>
+  <interpolation>
+   <entry>
+    <ind>0.0</ind>
+    <dep>0.0</dep>
+   </entry>
+   <entry>
+    <ind>0.1</ind>
+    <dep>0.0</dep>
+   </entry>
+   <entry>
+    <ind>0.9</ind>
+    <dep>0.565</dep>
+   </entry>
+   <entry>
+    <ind>1.0</ind>
+    <dep>0.565</dep>
+   </entry>
+  </interpolation> 
+  <axis>  
+   <x>0.87867</x>
+   <y>0</y>
+   <z>0.121327</z>
+  </axis>
+ </animation>
+ 
+  <animation>
+  <type>rotate</type>
+  
+  <object-name>canopyLowerSkin</object-name>
+  <object-name>brace</object-name>
+  <object-name>canopy</object-name>
+  <object-name>exteriorWindshieldBow</object-name>
+  <object-name>frontDoublerRight</object-name>
+  <object-name>frontDoublerLeft</object-name>
+  <object-name>rearSelf</object-name>
+  <object-name>rearStructure</object-name>
+  <object-name>truckBracketLeft</object-name>
+  <object-name>truckBracketRight</object-name>
+  <object-name>upperCoverLeft</object-name>
+  <object-name>upperCoverRight</object-name>
+  <object-name>windshieldBow</object-name>
+  <property>canopy/position-norm</property>
+    <interpolation>
+   <entry>
+    <ind>0.0</ind>
+    <dep>0.0</dep>
+   </entry>
+   <entry>
+    <ind>0.1</ind>
+    <dep>0.0</dep>
+   </entry>
+   <entry>
+    <ind>0.9</ind>
+    <dep>-3.2</dep>
+   </entry>
+   <entry>
+    <ind>1.0</ind>
+    <dep>-3.2</dep>
+   </entry>
+  </interpolation>
+  <axis>   
+   <x1-m>3.0375</x1-m>
+   <y1-m>1.0</y1-m>
+   <z1-m>0.3322224</z1-m>
+   <x2-m>3.0375</x2-m>
+   <y2-m>-1.0</y2-m>
+   <z2-m>0.3322224</z2-m>
+  </axis>
+ </animation>
+ 
+ <animation>
+   <type>material</type>
+   <object-name>canopyLowerSkin</object-name>
+   <object-name>exteriorWindshieldBow</object-name>
+   <property-base>sim/model/livery</property-base>
+   <texture-prop>texture-enclosure</texture-prop>
+   <texture>../Liveries/DDenclosure.png</texture>
+ </animation>
+ 
+<!-- <effect> 
+    does not work?
+    <inherits-from>Aircraft/p51d/Models/Effects/P-51D-glass-effect</inherits-from>
+    <object-name>canopy</object-name>
+    <object-name>windshieldLeft</object-name>
+    <object-name>windshieldRight</object-name>
+    <object-name>windshield</object-name>
+</effect> -->
+
+<effect> 
+  <inherits-from>Aircraft/p51d/Models/Effects/enclosureEffects</inherits-from>
+  <object-name>canopyLowerSkin</object-name>
+  <object-name>exteriorWindshieldBow</object-name>
+</effect>
+
+ <effect>
+    <inherits-from>Effects/model-transparent</inherits-from>
+    <condition>
+      <property>/sim/rendering/rembrandt/enabled</property>
+    </condition>
+    <object-name>canopy</object-name>
+    <object-name>windshieldLeft</object-name>
+    <object-name>windshieldRight</object-name>
+    <object-name>windshield</object-name>
+  </effect>
+    
+</PropertyList>

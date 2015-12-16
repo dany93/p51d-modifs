@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<PropertyList>
+
+ <path>seat-vintage.ac</path>
+
+ <animation>
+  <type>material</type>
+  <object-name>seatAndArmor</object-name>
+  <emission>
+    <factor-prop>controls/lighting/cabin-norm</factor-prop>
+    <red>0.28</red>
+    <green>0.18</green>
+    <blue>0.18</blue>
+  </emission>
+ </animation>
+
+</PropertyList>

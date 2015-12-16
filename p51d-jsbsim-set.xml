@@ -1,0 +1,762 @@
+<?xml version="1.0"?>
+
+<!--
+************************************************************************
+P-51D simulation config. This files ties together all the components
+used by FGFS to represent the P-51D. Components include the flight data 
+model, instrument panel, and external 3D model.
+
+March 2003 Jim Wilson, jimw@kelcomaine.com
+Apr. 2010 Hal V. Engel hvengel@yahoo.com (JSBSim model)
+************************************************************************
+-->
+
+<PropertyList>
+
+ <sim>
+
+  <description>North American Aviation P-51D-25-NA</description>
+  <author>Jim Wilson, Jon Berndt and Hal V. Engel</author>
+  <status>production</status>
+  <rating>
+     <FDM type="int">5</FDM>
+     <systems type="int">4</systems>
+     <model type="int">4</model>
+     <cockpit type="int">4</cockpit>
+  </rating>
+
+   <user>
+       <callsign>N5428V</callsign>
+   </user>
+   
+  <flight-model>jsb</flight-model>
+  <aero>p51d-jsbsim</aero>
+  <fuel-fraction>0.50</fuel-fraction>
+  
+  <startup>
+     <splash-texture>Aircraft/p51d/P-51D-splash.png</splash-texture>
+  </startup>
+
+  <virtual-cockpit archive="y">true</virtual-cockpit>
+  <allow-toggle-cockpit archive="y">false</allow-toggle-cockpit>
+  
+  <sound> 
+   <audible>true</audible>
+   <path>Aircraft/p51d/p51d-sound.xml</path>
+   <volume type="double">0.26</volume>
+  </sound>
+
+  <submodels> 
+    <serviceable type="bool">true</serviceable>
+    <path>Aircraft/p51d/submodels.xml</path>
+  </submodels>
+
+  <panel>
+     <path>Aircraft/Generic/Panels/generic-vfr-panel.xml</path>
+     <visibility>false</visibility>
+	 <visibility archive="y">false</visibility>
+  </panel>
+
+  <model>
+   <path>Aircraft/p51d/Models/p51d-jw-jsbsim.xml</path>
+   <livery>
+     <file type="string">DD</file>
+   </livery>
+  </model> 
+
+  <view n="0">
+   <name>Cockpit</name>
+   <internal archive="y">true</internal>
+   <config>
+    <x-offset-m archive="y" type="double">0.0</x-offset-m>
+    <y-offset-m archive="y" type="double">0.675</y-offset-m>
+    <z-offset-m archive="y" type="double">3.28972</z-offset-m>
+    <pitch-offset-deg>-15.5</pitch-offset-deg>
+   </config>
+  </view>
+
+  <view n="1">
+   <config>
+    <target-z-offset-m archive="y" type="double">3.949</target-z-offset-m>
+   </config>
+  </view>
+
+  <view n="2">
+   <config>
+    <target-z-offset-m archive="y" type="double">3.949</target-z-offset-m>
+   </config>
+  </view>
+
+  <view n="3">
+   <config>
+    <target-z-offset-m archive="y" type="double">3.949</target-z-offset-m>
+   </config>
+  </view>
+
+  <view n="4">
+   <config>
+    <target-z-offset-m archive="y" type="double">3.949</target-z-offset-m>
+   </config>
+  </view>
+
+  <view n="5">
+   <config>
+    <target-z-offset-m archive="y" type="double">3.949</target-z-offset-m>
+   </config>
+  </view>
+
+  <view n="6">
+   <config>
+    <target-z-offset-m archive="y" type="double">3.949</target-z-offset-m>
+   </config>
+  </view>
+
+  <systems>
+    <autopilot>
+        <path>Aircraft/p51d/Systems/autopilot.xml</path>
+    </autopilot>    
+  </systems>
+
+  <hud>
+   <enable3d>false</enable3d>
+  </hud>
+
+  <help>
+
+    <line>Maximum Speed: 437 mph</line>
+    <line>Cruise Speed: 363 mph</line>
+    <line>Landing Speed: 100 mph</line>
+    <line>Initial Climb Rate: 3475 feet per minute</line>
+    <line>Sustained Climb Speed: 175 mph</line>
+    <line>Service Ceiling: 41,200</line>
+    <line>Stall Speed (9000 lbs) Gear/Flaps Up: 102 mph</line>
+    <line>Stall Speed (9000 lbs) Gear/Flaps Down: 95 mph</line>
+    <line>Crtl-D to drop bombs, external tanks or fire rockets</line>
+	<line>e to fire guns</line>
+    <text>    STARTING THE ENGINE___________________________________
+1. Set propeller control to full INCREASE.
+2. Ignition switch OFF.
+3. Battery-disconnect (second switch, top row of electrical box to pilots right) OFF.
+4. Mixture to IDLE CUTOFF. (In FG /controls/engines/engine/mixture less than 0.1)
+5. Have ground crew pull propeller through several revolutions.  (This can be ignored since it is not modeled).
+6. Fuel Cut Off valve ON.
+7. External power supply connected. (Battery-disconnect switch ON if external power supply not available.)
+8. Power up guns, camera and gun sight (left side lower central panel).
+9. Power up gun sight gyro to prevent damage from engine start up (gun sight controller just below left florescent light).
+10. Check throttle open approximately one inch (1500 RPM). (To start position on late air planes.) (In FG /controls/engines/engine/throttle between 0.14 and 0.18)
+11. Oil and coolant radiator air controls switches at OPEN until flaps are fully opened; then release switches to OFF. (Can be ignored since this is not yet modeled.)
+12. Check propeller is clear.
+13. Hold start switch ON.
+14. Ignition switch to BOTH after 6 blades have passed.
+15. Fuel boost switch to ON.
+16. Primer switch ON 3 or 4 seconds when cold, one second when hot.
+17. When engine starts, move mixture control to RUN and release primer switch as engine smooths out.  Do not jockey throttle. If engine does not start after turning several revolutions, continue priming.
+18. Check oil pressure. If it is not at 50 psi with in 30 seconds after engine starts stop engine and investigate.
+19. Move battery-disconnect to ON after disconnecting external power supply.
+20. Move generator-disconnect to ON.
+
+   PREFLIGHT AIRPLANE CHECK_________________________________
+1. Primary Controls:
+   Check surfaces for free movement.
+2. Instruments and Switches:
+   Altimeter set.
+   Directional gyro set.
+   All instrument readings in desired ranges.
+   All switches and controls in desired positions.
+3. Fuel System:
+   Check fuel tank selector handle on MAIN TANK L. H.  Be sure selector is in detent.
+   Fuel boost pump switch at ON.
+   Primer switch OFF.
+4. Flaps:
+   Flaps set for take-off (up for normal take-off).
+5. Trim:
+   Trim tabs set for take-off:
+      FUSELAGE TANK 0 to 25 GAL
+         Rudder 6 degrees right
+         Elevator 0 degrees
+         Aileron 0 degrees
+
+      FUSELAGE TANK FULL (65 gal. operational limit)
+         Rudder 6 degrees right
+         Elevator 2 to 4 degrees nose-heavy
+         Aileron 0 degrees
+6. Check all circuit breakers in.
+7. Check that cockpit enclosure in locked and that canopy emergency release handle is safetied.
+
+   PREFLIGHT ENGINE CHECK_________________________________
+1. Check propeller in full INCREASE.
+2. Power check - advance throttle to obtain 2300 RPM.  At this RPM, the manifold pressure should read 1/2 in. Hg less than field barometric pressure within +-1/2 in Hg.
+3. Ignition system check - at 2300 RPM, with propeller in full INCREASE, move ignition switch from BOTH to L, back to BOTH, then to R, and back to BOTH.  Let engine speed stabilize at BOTH between checks.  A maximum drop of 100 RPM is allowable for right magneto and 120 RPM for the left magneto.
+4. Idle speed check - idle engine at 650 to 700 RPM with throttle at idle stop.
+5. Acceleration and deceleration check - with mixture control at RUN,  advance throttle from idle to 2300 RPM.  Engine should accelerate and decelerate smoothly with not tendency to backfire.
+6. Set throttle for 1500 RPM for best cooling during prolonged ground operations.
+7. Carburetor ram-air control lever to RAM AIR. (UN-RAMMED FILTERED AIR or carburetor hot-air control lever at HOT_AIR only if required.) (not currently modeled.)
+8. Check mixture control at RUN.
+9. Check supercharger control switch at AUTO.
+10. Oil and coolant radiators air controls switches at AUTOMATIC. (not currently modeled.)
+
+   TAKE OFF___________________________________________________
+1. Initially hold tail down with full aft stick.
+2. Slowly increase throttle to 40 inHG Manifold Pressure as you pick up speed.
+3. Be ready to actuate rudder during the take off roll.
+4. At about 50 MPH indicated start releasing stick back pressure. The tail will start to lift and the airplane will want to go to the left as the tail is coming up.
+5. Once the tail is up increase throttle to 61 inHG.
+6. As you gain speed the amount of rudder correction to the right will need to be decreased and you may need to use left rudder depending on how much right rudder trim you set.
+7. Stay on top of rudder and elevator with small adjustments and keep the nose down until rotation or you'll do a ground loop.
+8. Rotate at 150 mph if you have enough room but never below 120 mph (short field only).
+9. As you raise the gear the trim will change in a nose up direction.  Be careful to avoid stalling or loosing air speed as the gear is retracted.
+10. All of the take off trim settings will need to be adjusted as you pick up speed so this will contribute to a high pilot work load during the take off.  You will need to remove right rudder trim almost as soon as you leave the ground.
+
+   CLIMB__________________________________________________
+1. Back off manifold pressure to 46 inHG.
+2. Adjust propeller pitch to 2700 RPM.
+3. The throttle has automatic boost controls and will hold the manifold pressure setting as long as the supercharger has enough boost to provide the selected setting.  It will hold 46 inHg to about 30,000 feet.
+4. The mixture control is also automatic if it is set in the RUN position.
+5. If the supercharger speed switch is at AUTOMATIC the supercharger gear ratio will be controlled by an automatic system.
+
+    FLYING________________________________________________
+1. Trim and Cruise at between 2100 and 2400 RPM with between 30 and 36 inHg manifold pressure.
+2. Do not exceed 2700 RPM or 46 inHg sustained.
+3. Do not exceed 3000 RPM military power (aerobatics)
+4. Do not exceed 3500 RPM in dives.
+5. Do not exceed 61 inHG Manifold Pressure (military power), except 75 inHG for maximum of 7 minutes (war emergency power).
+
+    PRE_TRAFFIC_PATTERN CHECK_____________________________
+1. Fuel tank selector handle on fullest internal tank.
+2. Check that fuel booster pump switch is ON.
+3. Check carburetor RAM and HOT-AIR control levers as needed.
+4. Mixture control at RUN.
+5. Propeller set at 2700 RPM.
+6. Oil and coolant radiator air control switch AUTOMATIC.
+7. Clean out engine at 3000 RPM and 61 inHg for one minute.
+
+    TRAFFIC_PATTERN CHECK_________________________________
+1. Landing gear handle DN below 170 MPH IAS.
+2. Check gear position by use of warning lights, horn and hydraulic pressure.
+3. Flaps down 15 degrees for steeper approach if desired.
+4. Recheck gear and flaps.
+5. Throttle closed when landing assured.
+6. Flaps full down at altitude of at least 400 feet.  (Below 165 MPH IAS.)
+7. 120 MPH IAS at edge of field.
+
+    LANDING________________________________________________
+1. Use continuous back pressure on the stick to obtain an tail-low attitude for actual touch down.
+2. Because of the wide landing gear and locked tail wheel, landing characteristics are excellent on this aircraft.
+3. Minimize use of brakes during ground roll.
+4. At completion of the landing roll, clear runway as soon as possible.  Excessive braking can cause you to do a ground loop (nose over).  Some recommend raising flaps immediately after touchdown.
+    
+    TRIGGERS_______________________________________________
+The e key is mapped to the gun trigger.
+Ctrl-D is mapped to the second trigger on top of the stick.  This can be used to drop bombs, drop tanks and to fire rockets depending on how the weapons system related switches on the panel are set.  If you wish to use a joystick button for this (recommended) please see the README.p51d.jsbsim file for details on how to set this up.
+</text>
+  </help>
+  
+
+  <!-- multi-play bombable -->
+  <multiplay>
+    <generic>
+      <!--
+      needed triggers for bombable
+      controls/armament/rocket[1]/trigger through controls/armament/rocket[10]/trigger
+      controls/armament/bomb-trigger-1 and controls/armament/bomb-trigger-2
+      controls/armament/drop-tank-release-1 and controls/armament/drop-tank-release-2
+      /fdm/jsbsim/systems/armament/gun-SmokeAnimated/Inner 
+      /fdm/jsbsim/systems/armament/gun-SmokeAnimatedOuter
+      /fdm/jsbsim/systems/armament/ejectionAnimatedOuter
+      /fdm/jsbsim/systems/armament/ejectionAnimatedInner
+      -->
+        <int n="0" /> <!-- alias="/engines/engine[0]/cranking" -->
+        <int n="1" />  <!-- /controls/armament/gun-trigger -->
+        <int n="2" />  <!-- /controls/armament/trigger2 --> 
+        <int n="4" />  <!-- /ai/submodels/submodel[12]/count -->
+		<int n="5" />  <!-- /ai/submodels/submodel[13]/count -->
+		<int n="6" />  <!-- /ai/submodels/submodel[14]/count -->
+		<int n="7" />  <!-- /ai/submodels/submodel[15]/count -->
+		<int n="8" />  <!-- /ai/submodels/submodel[16]/count -->
+		<int n="9" />  <!-- /ai/submodels/submodel[17]/count -->
+		<int n="10" />  <!-- /ai/submodels/submodel[18]/count -->
+		<int n="11" />  <!-- /ai/submodels/submodel[19]/count -->
+		<int n="12" />  <!-- /ai/submodels/submodel[20]/count -->
+		<int n="13" />  <!-- /ai/submodels/submodel[21]/count -->
+        <int n="14" />  <!-- /ai/submodels/submodel[22]/count -->
+		<int n="15" />  <!-- /ai/submodels/submodel[23]/count -->
+		<int n="16" />  <!-- /ai/submodels/submodel[24]/count -->
+		<int n="17" />  <!-- /ai/submodels/submodel[25]/count -->
+		<int n="18" />  <!-- /fdm/jsbsim/systems/armament/bomb-pylons -->
+        <int n="19" />  <!-- /fdm/jsbsim/systems/armament/outer-pylons -->
+		<int n="20" />  <!-- /fdm/jsbsim/systems/armament/inner-pylons -->
+		
+        <float n="0"/> <!-- inner gear door pos -->
+        <float n="1"/>
+        <float n="2"/>
+        <float n="3" /> <!-- /fdm/jsbsim/systems/cooling/radiator-door-pos -->
+        <float n="4" /> <!-- /fdm/jsbsim/systems/cooling/oil-door-pos -->
+        <float n="5" /> <!-- /fdm/jsbsim/gear/unit[2]/steering-angle-deg -->
+        <float n="6" /> <!-- /controls/lighting/wing-position-lights -->
+        <float n="7" /> <!-- /controls/lighting/tail-position-lights -->
+        <float n="8" /> <!-- /controls/lighting/red-rec-light -->
+        <float n="9" /> <!-- /controls/lighting/green-rec-light -->
+        <float n="10" /> <!-- /controls/lighting/amber-rec-light -->
+        <string n="0" type="string"/>
+    </generic>
+  </multiplay>
+
+  <!-- increase pilot g tolarance -->
+  <!-- this plane has g-suit support so the pilot
+       can tolerate high G levels -->
+  <rendering>
+    <redout>
+       <parameters>
+         <blackout-onset-g type="double">5.0</blackout-onset-g>
+         <blackout-complete-g type="double">7.0</blackout-complete-g>
+         <redout-onset-g type="double">-2.5</redout-onset-g>
+         <redout-complete-g type="double">-3.5</redout-complete-g>
+       </parameters>
+    </redout>
+  </rendering>
+  
+  <signals>
+    <fdm-initialized type="int">0</fdm-initialized>
+  </signals>
+
+ <menubar include="Dialogs/menu-bar.xml" />
+   <checklists include="Checklists/p51d-checklists.xml"/>
+
+ </sim>
+ 
+ <instrumentation>
+    <magnetic-compass>
+       <bookmark-heading-deg type="double">43.0</bookmark-heading-deg>
+    </magnetic-compass>
+    <comm n="1">
+       <power-btn type="int">0</power-btn>
+    </comm> 
+ </instrumentation>
+ 
+  <gear>
+    <gear n="1">
+       <position-norm type="float">1</position-norm>
+    </gear>
+    <jackstandsZ type="float">0</jackstandsZ>
+ </gear>
+ 
+ <input>
+     <keyboard>
+      <key n="4">
+        <name>Ctrl-D</name>
+        <desc>Fire Rockets or Release Bombs or Release Drop Tanks</desc>
+        <repeatable>false</repeatable>
+        <binding>
+            <command>nasal</command>
+            <script>setprop("/controls/armament/trigger2", 1)</script>
+        </binding>
+        <mod-up>
+            <binding>
+                <command>nasal</command>
+                <script>setprop("/controls/armament/trigger2", 0)</script>
+            </binding>
+        </mod-up>
+      </key>
+	  <key n="101">
+        <name>e</name>
+        <desc>Gun Trigger</desc> 
+        <repeatable>false</repeatable>
+        <binding>
+            <command>nasal</command>
+            <script>setprop("/controls/armament/trigger", 1)</script>
+        </binding>
+        <mod-up>
+            <binding>
+                <command>nasal</command>
+                <script>setprop("/controls/armament/trigger", 0)</script>
+            </binding>
+        </mod-up> 
+     </key>
+     <key n="99">
+        <name>c</name>
+        <desc>Open/Close canopy</desc>
+        <binding>
+          <command>property-cycle</command>
+          <property>/canopy/direction</property>
+          <value type="int">0</value>
+          <value type="int">1</value>
+        </binding>
+        <binding>
+          <command>property-interpolate</command>
+          <property>/canopy/position-norm</property>
+          <property>/canopy/direction</property>
+          <rate>0.15</rate>
+        </binding>
+      </key>
+      <key n="115">
+        <name>s</name>
+        <desc>starter switch</desc>  
+        <binding>        
+           <command>nasal</command>
+           <script>controls.startEngine(1)</script>
+        </binding>
+	    <binding>
+           <command>property-assign</command>
+           <property>/fdm/jsbsim/systems/engine/starter</property>
+           <value>1</value>
+        </binding>
+        <mod-up>
+           <binding>
+              <command>nasal</command>
+              <script>controls.startEngine(0)</script>
+           </binding>
+	       <binding>
+              <command>property-assign</command>
+              <property>/fdm/jsbsim/systems/engine/starter</property>
+              <value>0</value>
+           </binding>
+         </mod-up> 
+      </key>
+    </keyboard>
+ </input>
+ 
+<!-- initialize control properties -->
+ <canopy>
+      <position-norm type="float">1.0</position-norm>
+      <direction type="int">1</direction>
+ </canopy>
+ <controls>   
+   <engines>
+      <engine n="0">
+        <magnetos type="int">0</magnetos>
+        <supercharger-switch type="int">0</supercharger-switch>
+        <primer-time type="float"> 0.0 </primer-time>
+        <master-bat type="int"> 0 </master-bat>
+		<starter type="int"> 0 </starter>
+        <blower-light-check type="int">0</blower-light-check>
+      </engine>
+   </engines>
+   <lighting>
+      <tail-position-lights type="int"> 0 </tail-position-lights>
+      <wing-position-lights type="int"> 0 </wing-position-lights>
+      <red-rec-light type="int"> 0 </red-rec-light>
+      <green-rec-light type="int"> 0 </green-rec-light>
+      <amber-rec-light type="int"> 0 </amber-rec-light>
+      <red-rec-light-sw type="int"> 0 </red-rec-light-sw>
+      <green-rec-light-sw type="int"> 0 </green-rec-light-sw>
+      <amber-rec-light-sw type="int"> 0 </amber-rec-light-sw>
+      <rec-light-key type="int">0</rec-light-key>
+      <right-flor-pos type="int"> 0 </right-flor-pos>
+      <left-flor-pos type="int">0</left-flor-pos>
+   </lighting>
+   <electric>
+      <reset type="int">0</reset>
+   </electric>
+   <anti-ice>
+     <pitot-heat type="int"> 0 </pitot-heat>
+     <gun-heat type="int"> 0 </gun-heat>
+   </anti-ice>
+   <canopy>
+      <open-command type="float">1.0</open-command>
+   </canopy>
+   <fuel>
+      <on>0</on>
+      <tank-selector type="int">0</tank-selector>
+      <tank n="1">
+         <to_tank type="int">1</to_tank>
+      </tank>
+      <tank n="2">
+         <to_tank type="int">2</to_tank>
+      </tank>
+      <tank n="3">
+         <to_tank type="int">3</to_tank>
+      </tank>
+      <tank n="4">
+         <to_tank type="int">4</to_tank>
+      </tank>
+   </fuel>
+   <armament>
+     <User-Selected-Stores type="int">0</User-Selected-Stores>
+     <gunsight>		
+		<!-- gunsight computer parameters -->
+        
+        <!-- start/stop the sight computer
+       	     the computer will be reinitialized if the power is cycled -->	
+        <computer-on type="int">0</computer-on>			 	
+        <!-- offset of guns below sight line in feet -->		
+		<z-offsetFeet type="float">3.125</z-offsetFeet>
+		<!-- average lateral offset of guns in feet relative to sight line -->
+        <y-offsetFeet type="float">0.0</y-offsetFeet>
+		<!-- elevation of guns relative to alpha in degrees -->
+        <gunElevationDegrees type="float">1.0</gunElevationDegrees>
+        <ballisticCoefficienct type="float">0.00136354</ballisticCoefficienct> <!-- 0.50 BMG -->
+        <muzzleVelocity type="float">2900.0</muzzleVelocity>  <!-- feet per second 0.50 BMG -->
+		<!-- convergence distance in feet -->
+        <gunHarminizationRangeFeet type="float">900.0</gunHarminizationRangeFeet>
+		<timeStep type="float">0.1</timeStep>  <!-- cycle rate of gun sight computer in seconds -->
+		<!-- sight computer damping factor must be between 0.3 and 1.0 -->
+		<dampingFactor type="float">1.0</dampingFactor>	
+		<gunsight-computer-initialized type="int">0</gunsight-computer-initialized>
+		<maxAzimuth type="int">170</maxAzimuth>  <!-- maximum sight deflection in mils -->
+		<maxElevation type="int">170</maxElevation>
+        <SIG type="float">0.4</SIG>
+        <timeStep type="float">0.2</timeStep>
+		
+		<!-- K14 parameters -->
+		
+		<power-on type="int">0</power-on>
+        <intensity type="float">1.0</intensity>
+		<mask-off type="int">1</mask-off>
+		<reticleSelectorPos type="int">0</reticleSelectorPos>
+		<rocketLadder type="int">1</rocketLadder>  <!-- set to 0 for K14 and 1 for other K14 models -->
+		
+		<!-- The next three are to setup the reticle to the correct starting values -->
+		<span type="int">30</span>
+		<mils type="float">0.0</mils>
+		<range type="float">1000.0</range> <!-- in feet -->
+		
+		<fixedReticleOn type="int">0</fixedReticleOn>
+		<zCenterLine type="float">0.7375</zCenterLine> <!-- sight line distance from model z axis in meters -->
+		<K14C type="int">0</K14C>  <!-- set to 1 for K14C -->
+		
+		<sunScreenDown type="int">1</sunScreenDown>
+     </gunsight>
+	 <throttle>
+	    <twistCenterX type="float">0.0985 </twistCenterX>
+		<twistCenterZ type="float">0.0827 </twistCenterZ>
+	 </throttle>
+     <weapons-select type="int">0</weapons-select>
+     <next-RX type="int">1</next-RX>
+     <instant type="int">1</instant>
+     <rockets type="int"> 0 </rockets>
+     <bombs-train type="int"> 0 </bombs-train>
+     <bombs-both type="int"> 0 </bombs-both>
+     <guns-enabled type="int">0</guns-enabled>p
+     <left-bomb-arm-chem-release type="int">0</left-bomb-arm-chem-release>
+     <right-bomb-arm-chem-release type="int">0</right-bomb-arm-chem-release>
+     <rocket-controler type="int"> 0 </rocket-controler>
+     <triggerLast type="int"> 0 </triggerLast>
+     <salvoCount type="int"> 1 </salvoCount>
+     <trigger-released type="int"> 0 </trigger-released>
+     <trigger type="int">0</trigger>
+     <guns-enabled type="int"> 0 </guns-enabled>
+     <trigger2 type="bool"> 0 </trigger2>
+     <bomb-trigger-1 type="int">0</bomb-trigger-1>
+     <bomb-trigger-2 type="int">0</bomb-trigger-2>
+     <drop-tank-release-2 type="int">0</drop-tank-release-2>
+     <drop-tank-release-1 type="int">0</drop-tank-release-1>
+     <salvo-right type="int">0</salvo-right>
+     <salvo-left type="int">0</salvo-left>
+     <salvo-right-hs type="int">0</salvo-right-hs>
+     <salvo-left-hs type="int">0</salvo-left-hs>
+     <salvo-both type="int">0</salvo-both>
+     <trigger type="int">0</trigger>
+     <rocket n="1">
+       <trigger type="int">0</trigger>
+     </rocket>
+     <rocket n="2">
+       <trigger type="int">0</trigger>
+     </rocket>
+     <rocket n="3">
+       <trigger type="int">0</trigger>
+     </rocket>
+     <rocket n="4">
+       <trigger type="int">0</trigger>
+     </rocket>
+     <rocket n="5">
+       <trigger type="int">0</trigger>
+     </rocket>
+     <rocket n="6">
+       <trigger type="int">0</trigger>
+     </rocket>
+     <rocket n="7">
+       <trigger type="int">0</trigger>
+     </rocket>
+     <rocket n="8">
+       <trigger type="int">0</trigger>
+     </rocket>
+     <rocket n="9">
+       <trigger type="int">0</trigger>
+     </rocket>
+     <rocket n="10">
+       <trigger type="int">0</trigger>
+     </rocket>
+   </armament>
+   <gear>
+      <gear-safe-light-check type="int">0</gear-safe-light-check>
+      <gear-unsafe-light-check type="int">0</gear-unsafe-light-check>
+      <leverPos type="float">0.0</leverPos>
+   </gear>
+   <flight>
+      <flaps type="float">1.0</flaps>
+   </flight>   
+ </controls>
+ 
+ <consumables>
+   <fuel>
+      <tank n="0">
+         <name>Main Left Wing</name>
+      </tank>
+      <tank n="1">
+         <name>Main Right Wing</name>
+      </tank>
+      <tank n="2">
+         <name>Fuselage</name>
+      </tank>
+      <tank n="3">
+         <name>Combat Tank Left</name>
+      </tank>
+      <tank n="4">
+         <name>Combat Tank Right</name>
+      </tank>
+   </fuel>
+ </consumables>
+ 
+ <fdm>
+   <jsbsim>
+      <velocities>
+        <zero type="float">0.0</zero>
+      </velocities> 
+      <propulsion>
+        <engine>
+          <prop-induced-velocity_fps_clipped type="float">0.0</prop-induced-velocity_fps_clipped>
+        </engine>
+      </propulsion>        
+      <systems>
+        <pilotAlwaysVisible type="int">0</pilotAlwaysVisible>
+        <compressibility>
+           <hertz type="float">0.0</hertz>
+           <strength type="float">0.0</strength>
+        </compressibility>     
+        <crash-detect>
+          <wing-load type="float">0.0</wing-load>
+        </crash-detect> 
+        <armament>
+           <trigger-both type="int">0</trigger-both>
+           <trigger-right type="int">0</trigger-right>
+           <trigger-left type="int">0</trigger-left>
+        </armament>
+        <Ox>
+           <blinker type="int">0</blinker>
+           <pressure type="float"> 400.0 </pressure>
+        </Ox>
+        <hydraulic>
+           <pressure type="float"> 0.0 </pressure>
+        </hydraulic>
+        <brakes>
+            <brake-scaling type="float">1.0</brake-scaling>
+        </brakes>
+        <cooling>
+           <radiator-door-pos type="float"> 0.0 </radiator-door-pos>
+           <oil-door-pos type="float"> 0.0 </oil-door-pos>
+        </cooling>
+      </systems>
+      <ap>
+        <map-error type="float">0.0</map-error>
+      </ap>
+      <fcs>
+        <flap-cmd-norm type="float">1.0</flap-cmd-norm>
+        <qbar-psf_clipped type="float">0.0</qbar-psf_clipped>
+      </fcs>  
+   </jsbsim>
+ </fdm>
+ 
+<ai>
+   <submodels>
+      <submodel n="2">
+         <count type="int">0</count>
+      </submodel>
+      <submodel n="3">
+         <count type="int">0</count>
+      </submodel>
+      <submodel n="4">
+         <count type="int">0</count>
+      </submodel>
+      <submodel n="5">
+         <count type="int">0</count>
+      </submodel>
+      <submodel n="6">
+         <count>0</count>
+      </submodel>
+      <submodel n="7">
+         <count type="int">0</count>
+      </submodel>
+      <submodel n="8">
+         <count type="int">0</count>
+      </submodel>
+      <submodel n="9">
+         <count type="int">0</count>
+      </submodel>
+      <submodel n="10">
+         <count type="int">0</count>
+      </submodel>
+      <submodel n="11">
+         <count type="int">0</count>
+      </submodel>
+      <submodel n="12">
+         <count>0</count>
+      </submodel>
+      <submodel n="13">
+         <count type="int">0</count>
+      </submodel>
+      <submodel n="14">
+         <count type="int">0</count>
+      </submodel>
+      <submodel n="15">
+         <count type="int">0</count>
+      </submodel>
+      <submodel n="16">
+         <count type="int">0</count>
+      </submodel>
+      <submodel n="17">
+         <count type="int">0</count>
+      </submodel>
+      <submodel n="18">
+         <count type="int">0</count>
+      </submodel>
+      <submodel n="19">
+         <count type="int">0</count>
+      </submodel>
+      <submodel n="20">
+         <count type="int">0</count>
+      </submodel>
+      <submodel n="21">
+         <count type="int">0</count>
+      </submodel>
+	  <submodel n="22">
+         <count type="int">0</count>
+      </submodel>
+      <submodel n="23">
+         <count type="int">0</count>
+      </submodel>
+	  <submodel n="24">
+         <count type="int">0</count>
+      </submodel>
+      <submodel n="25">
+         <count type="int">0</count>
+      </submodel>
+   </submodels>
+ </ai>
+
+  <nasal>
+    <p51d>
+      <file>Aircraft/p51d/Nasal/over-ride-flaps.nas</file>
+      <file>Aircraft/p51d/Nasal/stores.nas</file>
+      <file>Aircraft/p51d/Nasal/limits.nas</file>
+      <file>Aircraft/p51d/Nasal/engine-start.nas</file>
+      <file>Aircraft/p51d/Nasal/sputter.nas</file>
+      <file>Aircraft/p51d/Nasal/climbrate.nas</file>
+      <file>Aircraft/p51d/Nasal/gear-doors.nas</file>
+      <file>Aircraft/p51d/Nasal/gear-lever.nas</file>
+      <file>Aircraft/p51d/Nasal/liveries.nas</file>
+      <file>Aircraft/p51d/Nasal/tyresmoke.nas</file>
+    </p51d>
+    <SCR_522C>
+      <file>Aircraft/Instruments-3d/SCR-522C/Nasal/SCR-522C.nas</file>
+    </SCR_522C>
+	<K14>
+	  <file>Aircraft/Instruments-3d/computing-gun-sights/Nasal/lead-computer.nas</file>
+	  <file>Aircraft/Instruments-3d/computing-gun-sights/K14/Nasal/K14-reticle.nas</file>
+	</K14>
+  </nasal>
+
+</PropertyList>
+
+
+
+

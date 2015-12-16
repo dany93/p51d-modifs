@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!-- Battery Disconnect Off check -->
+<PropertyList>
+	<condition>
+		<equals>
+			<property>/controls/engines/engine/master-bat</property>
+			<value>0</value>
+		</equals>
+	</condition>
+	<marker>
+		<x-m>2.825</x-m>
+		<y-m>0.29</y-m>
+		<z-m>0.1</z-m>
+		<scale>1</scale>
+	</marker>
+</PropertyList>
