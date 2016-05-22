@@ -1209,27 +1209,25 @@ Hal V. Engel hvengel@astound.net
             </product>
         </function>
         
-	<function name="aero/thrust-qbar_psf">
-	  <description>Air_velocity_due_to_propwash</description>
-      <sum>
-	    <product>
-	      <v> 0.5 </v>
-	      <p>atmosphere/rho-slugs_ft3</p>
-          <pow>
-            <product>
-              <p> propulsion/engine/prop-induced-velocity_fps </p>
-              <v> 2.0 </v>
-            </product>
-            <v> 2.0 </v>
-   	      </pow>        
-	    </product>
+    <function name="aero/thrust-qbar_psf">
+    <description>Dynamic_pressure_including_backwash</description>
+    <sum>
+        <product>
+            <v> 0.5 </v>
+            <p>atmosphere/rho-slugs_ft3</p>
+            <pow>
+                <product>
+                    <p> propulsion/engine/prop-induced-velocity_fps </p>
+                    <v> 2.0 </v>
+                </product>
+                <v> 2.0 </v>
+            </pow>        
+        </product>
         <p>aero/qbar-psf</p>
-      </sum>      
-	</function>
-	
+    </sum>      
+    </function>
 
         <axis name="DRAG">
-
 
             <!--
                Add in parisitic drag for fuselage etc.  Since
@@ -2299,8 +2297,8 @@ Hal V. Engel hvengel@astound.net
                 </product>
             </function>
 
-            <function name="aero/coefficient/Cnpw">
-                <description>Yaw_moment_due_to_propwash</description>
+            <function name="aero/coefficient/Cnspw">
+                <description>Yaw_moment_due_to_spiraling_propwash</description>
                 <product>
                     <property>metrics/Sw-sqft</property>
                     <property>metrics/bw-ft</property>
