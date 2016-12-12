@@ -1647,8 +1647,8 @@
   <animation>
   <type>spin</type>
   <object-name>mainWheelLeft</object-name>
-  <property>fdm/jsbsim/systems/wheelSpin</property>
-  <factor>-1.5</factor>
+  <property>gear/gear[0]/rollspeed-ms</property>
+   <factor>-27.1</factor>
   <center>
    <x-m>1.91262</x-m>
    <y-m>-1.83774</y-m>
@@ -1664,8 +1664,8 @@
  <animation>
   <type>spin</type>
   <object-name>mainWheelRight</object-name>
-  <property>fdm/jsbsim/systems/wheelSpin</property>
-  <factor>-1.5</factor>
+  <property>gear/gear[1]/rollspeed-ms</property>
+  <factor>-27.1</factor>
   <center>
    <x-m>1.91262</x-m>
    <y-m>-1.83774</y-m>
@@ -1677,6 +1677,26 @@
    <z>0.0</z>
   </axis>
  </animation>
+
+  <animation>
+  <type>spin</type>
+  <object-name>tailWheel</object-name>
+  <property>gear/gear[2]/rollspeed-ms</property>
+  <factor>-76.7</factor>
+  <center>
+   <x-m>6.86282</x-m>
+   <y-m>-0.01244</y-m>
+   <z-m>-0.79865</z-m>
+  </center>
+  <axis>
+   <x>0.0</x>
+   <y>1.0</y>
+   <z>0.0</z>
+  </axis>
+ </animation>
+
+
+
 
  <animation>
   <type>material</type>
