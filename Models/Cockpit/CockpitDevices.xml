@@ -255,7 +255,7 @@
   <name>LEFT_SWITCH_PANEL</name>
   <path>Aircraft/p51d/Models/Cockpit/LeftSwitchPanel/left-switch-box.xml</path>
   <offsets>
-   <x-m>2.95</x-m>
+   <x-m>3.05</x-m>
    <y-m>-0.366</y-m>
    <z-m>0.118</z-m>
   </offsets>
