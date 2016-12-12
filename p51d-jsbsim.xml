@@ -8,7 +8,11 @@ been extensively modified by:
 Hal V. Engel hvengel@astound.net
 
 -->
-<!-- In test, working file dany93. Some changes on stall and spin departure for takeoff and landing, spiraling propwash effect. 30 Nov 2015 -->
+<!--
+
+Daniel Dubreuil, a few changes on stall and spin departure for takeoff and landing, spiraling propwash effect
+
+-->
 
 <?xml-stylesheet type="text/xsl" href="http://jsbsim.sourceforge.net/JSBSim.xsl"?>
 <fdm_config name="P-51D (JSBSim)" version="2.0" release="BETA"
@@ -182,7 +186,7 @@ Hal V. Engel hvengel@astound.net
                 <y> -72 </y>
                 <z> -85 </z>
             </location>
-            <static_friction> 0.55 </static_friction>
+            <static_friction> 0.8 </static_friction>
             <dynamic_friction> 0.5 </dynamic_friction>
             <rolling_friction> 0.02 </rolling_friction>
             <spring_coeff unit="LBS/FT"> 9800 </spring_coeff>
@@ -198,7 +202,7 @@ Hal V. Engel hvengel@astound.net
                 <y> 72 </y>
                 <z> -85 </z>
             </location>
-            <static_friction> 0.55 </static_friction>
+            <static_friction> 0.8 </static_friction>
             <dynamic_friction> 0.5 </dynamic_friction>
             <rolling_friction> 0.02 </rolling_friction>
             <spring_coeff unit="LBS/FT"> 9800 </spring_coeff>
@@ -1063,7 +1067,7 @@ Hal V. Engel hvengel@astound.net
                 <output>gear/gear-pos-norm-down</output>
             </kinematic>
             
-            <switch name="gearPosTimed">
+           <switch name="gearPosTimed">
               <default value="0.0"/>
               <test value="gear/gear-pos-norm-up">
                  gear/gear-cmd-norm == 0
@@ -1072,7 +1076,7 @@ Hal V. Engel hvengel@astound.net
                  gear/gear-cmd-norm == 1
               </test>
               <output>gear/gear-pos-norm</output>
-           </switch>       
+            </switch>
            
         </channel>
 
@@ -1083,7 +1087,7 @@ Hal V. Engel hvengel@astound.net
                 <input>/controls/gear/brake-parking</input>
                 <clipto>
                     <min>0</min>
-                    <max>1</max>
+                    <max>0.69</max>
                 </clipto>
             </summer>
 
@@ -1092,7 +1096,7 @@ Hal V. Engel hvengel@astound.net
                 <input>/controls/gear/brake-parking</input>
                 <clipto>
                     <min>0</min>
-                    <max>1</max>
+                    <max>0.69</max>
                 </clipto>
             </summer>            
                         
@@ -1210,21 +1214,21 @@ Hal V. Engel hvengel@astound.net
         </function>
         
     <function name="aero/thrust-qbar_psf">
-    <description>Dynamic_pressure_including_backwash</description>
-    <sum>
-        <product>
-            <v> 0.5 </v>
-            <p>atmosphere/rho-slugs_ft3</p>
-            <pow>
-                <product>
-                    <p> propulsion/engine/prop-induced-velocity_fps </p>
+        <description>Dynamic_pressure_including_backwash</description>
+        <sum>
+            <product>
+                <v> 0.5 </v>
+                <p>atmosphere/rho-slugs_ft3</p>
+                <pow>
+                    <product>
+                        <p> propulsion/engine/prop-induced-velocity_fps </p>
+                        <v> 2.0 </v>
+                    </product>
                     <v> 2.0 </v>
-                </product>
-                <v> 2.0 </v>
-            </pow>        
-        </product>
-        <p>aero/qbar-psf</p>
-    </sum>      
+                </pow>        
+            </product>
+            <p>aero/qbar-psf</p>
+        </sum>      
     </function>
 
         <axis name="DRAG">
@@ -2303,7 +2307,7 @@ Hal V. Engel hvengel@astound.net
                     <property>metrics/Sw-sqft</property>
                     <property>metrics/bw-ft</property>
                     <property>propulsion/engine/thrust-lbs</property>
-                    <value>-0.00006</value>
+                    <value>-0.00002</value>
                     <table>
                         <independentVar lookup="row">/velocities/airspeed-kt</independentVar>
                         <tableData>

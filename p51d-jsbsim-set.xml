@@ -584,7 +584,7 @@ Ctrl-D is mapped to the second trigger on top of the stick.  This can be used to
       <leverPos type="float">0.0</leverPos>
    </gear>
    <flight>
-      <flaps type="float">1.0</flaps>
+      <flaps type="float">0.0</flaps>
    </flight>   
  </controls>
  

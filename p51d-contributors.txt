@@ -11,10 +11,13 @@ During 2010 - 2014, Hal Van Engel made this aircraft one of the most wonderful, 
 - 3D
 ..... ?
 
-Viewed from FlightGear, this aircraft was his "kid".
+Viewed from the FlightGear community, this aircraft was his "kid".
 
 Hal, we miss you very much...
 
 2015 - 2016:
 Autostart implementation by githlar.
 Some minor FDM modifications by Daniel Dubreuil.
+Wheel spin animations,
+Cockpit: fix Throttle, Mixture, Propeller pitch controls by mouse,
+Checklists: fix marker locations by Daniel Dubreuil
