@@ -195,19 +195,19 @@
   <panel>
   <path>Aircraft/p51d/Models/HotSpots/mix-RPM-hotspots.xml</path>
   <bottom-left>
-   <x-m>3.80</x-m>
+   <x-m>2.8</x-m>
    <y-m>-0.290</y-m>
-   <z-m>0.0</z-m>
+   <z-m>-0.05</z-m>
   </bottom-left>
   <bottom-right>
-   <x-m>4.2</x-m>
+   <x-m>3.2</x-m>
    <y-m>-0.295</y-m>
-   <z-m>0.0</z-m>
+   <z-m>-0.05</z-m>
   </bottom-right>
   <top-left>
-   <x-m>3.80</x-m>
+   <x-m>2.8</x-m>
    <y-m>-0.290</y-m>
-   <z-m> 0.45</z-m>
+   <z-m> 0.40</z-m>
   </top-left>
  </panel>
 

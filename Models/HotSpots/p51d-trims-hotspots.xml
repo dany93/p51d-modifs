@@ -67,7 +67,7 @@
                 <max type="double">1.0</max>
                 <step type="double">0.001</step>
             </binding>
-        </action>-->
+        </action>
 
         <!-- rudder trim -->
 

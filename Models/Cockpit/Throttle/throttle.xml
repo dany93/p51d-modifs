@@ -284,6 +284,37 @@
   </animation> -->
 
  <animation>
+  <type>pick</type>
+  <object-name>ThrottleGrip</object-name>
+  <action>
+  <name>Throttle increase</name>
+    <button>3</button>
+    <repeatable>false</repeatable>
+    <binding>
+              <command>property-adjust</command>
+              <property>/controls/engines/engine[0]/throttle</property>
+              <step>0.02</step>
+              <min>0</min>
+              <max>1</max>
+              <wrap>0</wrap>
+    </binding>
+  </action>
+  <action>
+  <name>Throttle decrease</name>
+    <button>4</button>
+    <repeatable>false</repeatable>
+    <binding>
+              <command>property-adjust</command>
+              <property>/controls/engines/engine[0]/throttle</property>
+              <step>-0.02</step>
+              <min>0</min>
+              <max>1</max>
+              <wrap>0</wrap>
+    </binding>
+  </action>
+</animation>
+
+ <animation>
   <type>rotate</type>
   <object-name>PropHandle</object-name>
   <object-name>PropKnob</object-name>aa
@@ -306,6 +337,37 @@
  </animation>
 
  <animation>
+  <type>pick</type>
+  <object-name>PropKnob</object-name>
+  <action>
+  <name>Prop finer</name>
+    <button>3</button>
+    <repeatable>false</repeatable>
+    <binding>
+              <command>property-adjust</command>
+              <property>/controls/engines/engine[0]/propeller-pitch</property>
+              <step>0.02</step>
+              <min>0</min>
+              <max>1</max>
+              <wrap>0</wrap>
+    </binding>
+  </action>
+  <action>
+  <name>Prop coarser</name>
+    <button>4</button>
+    <repeatable>false</repeatable>
+    <binding>
+              <command>property-adjust</command>
+              <property>/controls/engines/engine[0]/propeller-pitch</property>
+              <step>-0.02</step>
+              <min>0</min>
+              <max>1</max>
+              <wrap>0</wrap>
+    </binding>
+  </action>
+</animation>
+
+ <animation>
   <type>rotate</type>
   <object-name>MixtureHandle</object-name>
   <object-name>MixtureKnob</object-name>
@@ -314,22 +376,6 @@
    <entry>
     <ind>0.0</ind>
     <dep>-10</dep>
-   </entry>
-   <entry>
-    <ind>0.1</ind>
-    <dep>-10</dep>
-   </entry>
-   <entry>
-    <ind>0.11</ind>
-    <dep>50</dep>
-   </entry>
-   <entry>
-    <ind>0.89</ind>
-    <dep>50</dep>
-   </entry>
-   <entry>
-    <ind>0.9</ind>
-    <dep>70</dep>
    </entry>
    <entry>
     <ind>1.0</ind>
@@ -342,6 +388,37 @@
    <z>0</z>
   </axis>
  </animation>
+
+ <animation>
+  <type>pick</type>
+  <object-name>MixtureKnob</object-name>
+  <action>
+  <name>Mixture richer</name>
+    <button>3</button>
+    <repeatable>false</repeatable>
+    <binding>
+              <command>property-adjust</command>
+              <property>/controls/engines/engine/mixture</property>
+              <step>0.05</step>
+              <min>0</min>
+              <max>1</max>
+              <wrap>0</wrap>
+    </binding>
+  </action>
+  <action>
+  <name>Mixture leaner</name>
+    <button>4</button>
+    <repeatable>false</repeatable>
+    <binding>
+              <command>property-adjust</command>
+              <property>/controls/engines/engine/mixture</property>
+              <step>-0.05</step>
+              <min>0</min>
+              <max>1</max>
+              <wrap>0</wrap>
+    </binding>
+  </action>
+</animation>
  
  <animation>
   <type>translate</type>
